@@ -1,0 +1,187 @@
+⭐ DAY 22 — NODE BASICS & EXPRESS SETUP
+
+
+🎯 What you will learn
+✔ What is Node.js
+✔ Why Node is used
+✔ Node basic program
+✔ What is Express
+✔ How to create Express server
+✔ First API
+
+
+🔹 1️⃣ What is Node.js? (Very Simple)
+
+
+👉 Node.js allows JavaScript to run outside the browser.
+Before Node:
+JavaScript → only runs in browser
+After Node:
+JavaScript → runs on server
+Example uses:
+APIs
+Backend servers
+Real-time apps
+Chat apps
+
+
+🧠 Simple Example
+In browser:
+console.log("Hello");
+In Node terminal:
+node app.js
+Same JavaScript runs on server.
+
+
+🔹 2️⃣ Why Node.js is Popular
+✔ Fast
+✔ JavaScript everywhere (frontend + backend)
+✔ Non-blocking architecture
+✔ Large ecosystem (npm)
+
+
+Companies using Node:
+Netflix
+Uber
+PayPal
+
+
+🔹 3️⃣ Install Node.js
+Download from:
+👉 https://nodejs.org
+Install LTS version.
+Check installation:
+node -v
+npm -v
+Example output:
+v20.10.0
+10.2.1
+
+
+
+
+🔹 4️⃣ First Node Program
+Create file:
+app.js
+Code:
+console.log("My first Node program");
+Run:
+node app.js
+Output:
+My first Node program
+
+
+🔹 5️⃣ What is Express? (Very Important)
+👉 Express is a framework for Node.js to build APIs easily.
+Without Express:
+Too much code
+Complex routing
+With Express:
+✔ Easy server creation
+✔ Easy APIs
+✔ Routing system
+
+
+🔹 6️⃣ Create Node Project
+Create folder:
+backend-app
+Go inside folder:
+cd backend-app
+Initialize project:
+npm init -y
+This creates:
+package.json
+
+
+🔹 7️⃣ Install Express
+npm install express
+This installs Express inside:
+node_modules
+
+
+🔹 8️⃣ Create Express Server
+Create file:
+server.js
+Code:
+const express = require('express');
+
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send("Hello from server");
+});
+
+app.listen(3000, () => {
+  console.log("Server running on port 3000");
+});
+
+
+🔹 9️⃣ Run Server
+node server.js
+Terminal output:
+Server running on port 3000
+Open browser:
+http://localhost:3000
+Output:
+Hello from server
+🎉 Your backend server is working.
+
+
+🔹 🔟 What is happening in this code?
+Import express
+const express = require('express');
+Loads Express library.
+Create app
+const app = express();
+Creates server instance.
+Create route
+app.get('/', (req, res) => {})
+When user visits /, server responds.
+Send response
+res.send("Hello from server");
+Sends message to browser.
+Start server
+app.listen(3000)
+Server runs on port 3000.
+
+
+🔹 11️⃣ Create Another Route
+Example:
+app.get('/about', (req, res) => {
+  res.send("About page");
+});
+Now visit:
+localhost:3000/about
+Output:
+About page
+
+
+🔹 12️⃣ Real API Example
+app.get('/users', (req, res) => {
+
+  const users = [
+    {id:1, name:"Rahul"},
+    {id:2, name:"Amit"}
+  ];
+
+  res.json(users);
+
+});
+Visit:
+localhost:3000/users
+Output:
+[
+ { "id":1,"name":"Rahul"},
+ { "id":2,"name":"Amit"}
+]
+This is a backend API.
+
+
+🧠 DAY 22 SUMMARY
+Concept	Meaning
+Node.js	Run JavaScript on server
+npm	Package manager
+Express	Node framework
+app.get()	Create route
+res.send()	Send response
+app.listen()	Start server
