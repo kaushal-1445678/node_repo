@@ -185,3 +185,243 @@ Express	Node framework
 app.get()	Create route
 res.send()	Send response
 app.listen()	Start server
+
+🔹 1️⃣ What is an API? (Very Simple)
+
+
+👉 API = Application Programming Interface
+In simple words:
+API allows frontend to talk to backend
+Example flow:
+Angular → API → Node server → Database
+Example request:
+GET /users
+Server returns:
+[
+ { "id":1, "name":"Rahul" },
+ { "id":2, "name":"Amit" }
+]
+🔹 2️⃣ What is REST API?
+
+
+👉 REST = Representational State Transfer
+It means APIs follow standard HTTP methods.
+These methods are:
+Method	Purpose
+GET	Read data
+POST	Create data
+PUT	Update data
+DELETE	Remove data
+
+🔹 3️⃣ Example Data (Fake Database)
+
+
+Inside server.js:
+let users = [
+  { id: 1, name: "Rahul" },
+  { id: 2, name: "Amit" }
+];
+
+
+🔹 4️⃣ GET API (Read Data)
+
+
+app.get('/users', (req, res) => {
+  res.json(users);
+});
+Open:
+http://localhost:3000/users
+Output:
+[
+ { "id":1,"name":"Rahul"},
+ { "id":2,"name":"Amit"}
+]
+
+
+🔹 5️⃣ POST API (Create Data)
+
+
+First add middleware:
+app.use(express.json());
+Now create POST API:
+app.post('/users', (req, res) => {
+
+  const newUser = req.body;
+
+  users.push(newUser);
+
+  res.json({
+    message: "User added",
+    users: users
+  });
+
+});
+Example request body:
+{
+ "id":3,
+ "name":"Kaushal"
+}
+
+
+🔹 6️⃣ PUT API (Update Data)
+
+
+app.put('/users/:id', (req, res) => {
+
+  const id = parseInt(req.params.id);
+  const updatedName = req.body.name;
+
+  users = users.map(user => {
+    if(user.id === id){
+      user.name = updatedName;
+    }
+    return user;
+  });
+
+  res.json(users);
+
+});
+Example URL:
+PUT /users/1
+Body:
+{
+ "name":"Rohan"
+}
+
+
+🔹 7️⃣ DELETE API
+
+
+app.delete('/users/:id', (req, res) => {
+
+  const id = parseInt(req.params.id);
+
+  users = users.filter(user => user.id !== id);
+
+  res.json({
+    message:"User deleted",
+    users:users
+  });
+
+});
+Example:
+DELETE /users/2
+
+
+🔹 8️⃣ What is req and res?
+
+
+(req, res)
+Object	Meaning
+req	Request from client
+res	Response from server
+Example:
+req.body
+req.params
+req.query
+
+
+🔹 9️⃣ What is req.params?
+
+
+Used to read URL parameters.
+Example route:
+/users/:id
+If URL is:
+/users/5
+Then:
+req.params.id
+Output:
+5
+
+
+🔹 🔟 What is req.body?
+
+
+Used to read data sent from client.
+Example request:
+{
+ "name":"Kaushal"
+}
+Access it using:
+req.body.name
+
+
+🔹 11️⃣ Test APIs
+
+
+You can test using:
+Postman
+Thunder Client
+These tools send requests to server.
+
+
+🔹 12️⃣ Complete Example Server
+
+
+const express = require('express');
+
+const app = express();
+
+app.use(express.json());
+
+let users = [
+ { id:1, name:"Rahul"},
+ { id:2, name:"Amit"}
+];
+
+app.get('/users',(req,res)=>{
+ res.json(users);
+});
+
+app.post('/users',(req,res)=>{
+ users.push(req.body);
+ res.json(users);
+});
+
+app.put('/users/:id',(req,res)=>{
+
+ const id = parseInt(req.params.id);
+
+ users = users.map(user=>{
+  if(user.id === id){
+   user.name = req.body.name;
+  }
+  return user;
+ });
+
+ res.json(users);
+
+});
+
+app.delete('/users/:id',(req,res)=>{
+
+ const id = parseInt(req.params.id);
+
+ users = users.filter(user=>user.id !== id);
+
+ res.json(users);
+
+});
+
+app.listen(3000,()=>{
+ console.log("Server running on 3000");
+});
+
+
+🧠  SUMMARY
+
+
+Method	Use
+
+
+GET	Fetch data
+POST	Create data
+PUT	Update data
+DELETE	Remove data
+
+
+Important objects:
+req.params
+req.body
+res.json()
