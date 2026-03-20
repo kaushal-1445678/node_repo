@@ -36,7 +36,7 @@ app.post('/users', (req, res) => {
   res.json({
     message: "User added",
     users: users
-  });
+  }); 
 });
 
 // PUT API:-
