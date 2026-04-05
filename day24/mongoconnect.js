@@ -69,3 +69,7 @@ app.get('/users',async(req,res)=>{
 });
 
 app.listen(3000);
+
+
+
+// Client → API → Mongoose → MongoDB → Data stored
